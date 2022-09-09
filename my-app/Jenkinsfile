@@ -1,0 +1,29 @@
+pipeline {
+    agent any{
+        tools {
+            maven 'maven3'
+        }
+        stages{
+            stage('Build'){
+                sh script: 'mvn clean package'
+            }
+        }
+            stage('Upload War To Nexus'){
+                nexusArtifactUploader artifacts: [
+                    [
+                        artifactId: 'my-app', 
+                        classifier: '', 
+                        file: 'target/my-app-1.0-SNAPSHOT.war', 
+                        type: 'war'
+                        ]
+                    ], 
+                    credentialsId: 'nexuscredenciales', 
+                    groupId: 'com.abstracta.app', 
+                    nexusUrl: 'localhost:8081', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: 'http://localhost:8081/repository/simpleapp-release/', 
+                    version: '1.0-SNAPSHOT'
+            }
+    }
+}
