@@ -5,9 +5,12 @@ pipeline {
     }
         stages{
             stage('Build'){
-                sh 'mvn clean package'
+                steps{
+                    sh 'mvn clean package'
+                }
             }
             stage('Upload War To Nexus'){
+                steps{
                 nexusArtifactUploader artifacts: [
                     [
                         artifactId: 'my-app', 
@@ -24,5 +27,6 @@ pipeline {
                     repository: 'http://localhost:8081/repository/simpleapp-release/', 
                     version: '1.0-SNAPSHOT'
             }
+        }
     }
 }
