@@ -1,11 +1,11 @@
 pipeline {
     agent any{
-        tools {
-            maven 'maven3'
-        }
+    tools {
+        maven '3.8.6'
+    }
         stages{
             stage('Build'){
-                sh script: 'mvn clean package'
+                sh 'mvn clean package'
             }
         }
             stage('Upload War To Nexus'){
