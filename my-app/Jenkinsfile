@@ -19,7 +19,7 @@ pipeline {
                         type: 'war'
                         ]
                     ], 
-                    credentialsId: 'nexuscredenciales', 
+                    credentialsId: 'nexus3', 
                     groupId: 'com.abstracta.app', 
                     nexusUrl: 'localhost:8081', 
                     nexusVersion: 'nexus3', 
